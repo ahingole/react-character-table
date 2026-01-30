@@ -1,25 +1,101 @@
-import logo from './logo.svg';
-import './App.css';
+import CharacterTable from "./components/characters-table";
+import { useTable } from "./hooks/use-table";
 
-function App() {
+export default function App() {
+  // const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // const [search, setSearch] = useState("");
+  // const [healthFilter, setHealthFilter] = useState([]);
+  // const [sortPower, setSortPower] = useState(null);
+  // const [selectedIds, setSelectedIds] = useState(new Set());
+
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/characters")
+  //     .then(res => res.json())
+  //     .then(d =>
+  //       setData(d.map(c => ({ ...c, viewed: false })))
+  //     )
+  //     .finally(() => setLoading(false));
+  // }, []);
+
+  // const filteredData = useMemo(() => {
+  //   let result = [...data];
+
+  //   if (search) {
+  //     const q = search.toLowerCase();
+  //     result = result.filter(
+  //       c =>
+  //         c.name.toLowerCase().includes(q) ||
+  //         c.location.toLowerCase().includes(q)
+  //     );
+  //   }
+
+  //   if (healthFilter.length) {
+  //     result = result.filter(c => healthFilter.includes(c.health));
+  //   }
+
+  //   if (sortPower) {
+  //     result.sort((a, b) =>
+  //       sortPower === "asc" ? a.power - b.power : b.power - a.power
+  //     );
+  //   }
+
+  //   return result;
+  // }, [data, search, healthFilter, sortPower]);
+
+ 
+
+  // if (loading) {
+  //   return <p role="status">Loading table…</p>;
+  // }
+  //   const handleSubmit = () => {
+  //   console.log("Submitted IDs:", [...selectedIds]);
+    
+  // };
+const {search,
+    setSearch,
+    handleSubmit,
+    sortPower,
+    selectedIds,
+    filteredData,
+    setHealthFilter,
+    healthFilter,
+    setSelectedIds,
+    setSortPower,loading} =useTable()
+
+     if (loading) {
+   return <p role="status">Loading table…</p>;
+ }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <div>
+        <input
+          aria-label="Search"
+          placeholder="Search by name or location"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+
+           <button
+          onClick={handleSubmit}
+          disabled={!selectedIds.size}
+          style={{ marginLeft: 8 }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Submit
+        </button>
+      </div>
+
+      <CharacterTable
+        data={filteredData}
+        selectedIds={selectedIds}
+        onSelectionChange={setSelectedIds}
+        sortPower={sortPower}
+        onSortPower={setSortPower}
+        healthFilter={healthFilter}
+        onHealthFilterChange={setHealthFilter}
+      />
+    </>
   );
 }
-
-export default App;
