@@ -12,7 +12,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://your-username.github.io/react-character-table",
+  "homepage": "https://ahingole.github.io/react-character-table",
   "scripts": {
   "eject": "react-scripts eject",
   "start": "react-scripts start",
