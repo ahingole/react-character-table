@@ -1,4 +1,18 @@
 # Getting Started with Create React App
+# React Character Table
+
+A React table application with(no styling):
+
+- 1000+ rows
+- Selection column
+- Health filter (dropdown)
+- Sorting by power
+- Search by name/location
+- Mark Viewed/Unviewed
+- Submit button logs selected IDs
+- Accessible UI
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
